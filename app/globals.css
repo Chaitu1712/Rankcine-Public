@@ -1,26 +1,39 @@
+/* Tailwind v4 setup — no tailwind.config.js needed for basic theme
+   tokens. Colors/fonts are declared here via @theme and Tailwind
+   auto-generates utility classes from them (e.g. --color-rc-purple
+   becomes usable as bg-rc-purple, text-rc-purple, border-rc-purple). */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: "Sora", "Arial Black", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Brand colors — replace these hex values with the exact ones from
+     Figma once you have "inspect" access. */
+  --color-rc-purple: #6c5ce7;
+  --color-rc-purple-dark: #4b3fbf;
+  --color-rc-purple-light: #ede9fe;
+  --color-rc-black: #0a0a0a;
+
+  /* Extra gray shades used across cards/text */
+  --color-rc-gray-50: #fafafa;
+  --color-rc-gray-100: #f4f4f5;
+  --color-rc-gray-400: #a1a1aa;
+  --color-rc-gray-600: #52525b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: white;
+  color: var(--color-rc-black);
+  font-family: var(--font-body);
+}
+
+/* Utility for the layered "offset shadow" text look behind the hero
+   headline (WATCH. / RANK. / BE / HEARD.) */
+.text-offset-shadow {
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.12);
 }
