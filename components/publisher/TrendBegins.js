@@ -1,13 +1,39 @@
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
 // The 6 spokes coming off the central "UPLOAD" circle.
 const uploadSpokes = [
   { glyph: "👥", label: "Rankers", sub: "Rate & Rank", color: "bg-sky-100" },
-  { glyph: "📣", label: "Influencers", sub: "Promote & Share", color: "bg-pink-100" },
-  { glyph: "🏢", label: "Brands", sub: "Discover & Collaborate", color: "bg-amber-100" },
-  { glyph: "🏆", label: "Leaderboard", sub: "Top Content Ranks", color: "bg-violet-100" },
-  { glyph: "📊", label: "Insights", sub: "Track Performance", color: "bg-emerald-100" },
-  { glyph: "❤️", label: "Community", sub: "Engages & Reacts", color: "bg-rose-100" },
+  {
+    glyph: "📣",
+    label: "Influencers",
+    sub: "Promote & Share",
+    color: "bg-pink-100",
+  },
+  {
+    glyph: "🏢",
+    label: "Brands",
+    sub: "Discover & Collaborate",
+    color: "bg-amber-100",
+  },
+  {
+    glyph: "🏆",
+    label: "Leaderboard",
+    sub: "Top Content Ranks",
+    color: "bg-violet-100",
+  },
+  {
+    glyph: "📊",
+    label: "Insights",
+    sub: "Track Performance",
+    color: "bg-emerald-100",
+  },
+  {
+    glyph: "❤️",
+    label: "Community",
+    sub: "Engages & Reacts",
+    color: "bg-rose-100",
+  },
 ];
 
 // Dashboard stat tiles (Uploads, Views, Ranking Score, Audience Reach)
@@ -45,29 +71,14 @@ export default function TrendBegins() {
                 You Create. <span className="text-rc-purple">We Amplify.</span>
               </h3>
 
-              <div className="mt-6 flex items-center gap-4">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-rc-purple text-2xl text-white shadow-lg transition-transform duration-500 hover:rotate-12">
-                  ⬆️
-                  <span className="sr-only">Upload</span>
-                </div>
-
-                <div className="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-2">
-                  {uploadSpokes.map((spoke) => (
-                    <div
-                      key={spoke.label}
-                      className={`flex items-center gap-2 rounded-lg p-2 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md ${spoke.color}`}
-                    >
-                      <span className="text-lg">{spoke.glyph}</span>
-                      <div>
-                        <p className="text-xs font-bold text-rc-black">
-                          {spoke.label}
-                        </p>
-                        <p className="text-[10px] text-rc-gray-600">
-                          {spoke.sub}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+              <div className="mt-6 flex items-start gap-4">
+                <div className="relative flex h-124 w-124 top-y-10 items-center justify-center py-8">
+                  <Image
+                    src="/images/upload.png"
+                    alt="Laptop upload mockup"
+                    fill
+                    className="object-contain object-top"
+                  />
                 </div>
               </div>
             </div>

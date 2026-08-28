@@ -8,8 +8,10 @@
 // one more entry to the `tabOrder` array.
 
 import { useState } from "react";
+import Image from "next/image";
 import IconBadge from "@/components/ui/IconBadge";
 import Reveal from "@/components/ui/Reveal";
+import OutlinedHeading from "../ui/OutlinedHeading"; 
 
 const tabOrder = ["rankers", "promoters", "publisher"];
 
@@ -19,6 +21,10 @@ const tabLabels = {
   publisher: "Publisher",
 };
 
+// `heroImage` is a path under /public — e.g. "/images/tabs/rankers-why.png".
+// Swap these paths for your real assets; the containers around them
+// (size, background, rounded corners, hover animation) already match
+// each variant's layout, so dropping in a PNG needs no other changes.
 const tabsData = {
   rankers: {
     subheading: "See how rankings shape influence, visibility and discovery!",
@@ -28,7 +34,7 @@ const tabsData = {
         title: "Why rank?",
         subtitle: "Your voice shapes culture",
         variant: "list",
-        heroEmoji: "📣",
+        heroImage: "/images/Microphone.png",
         items: [
           { glyph: "💬", label: "Your voice steers culture" },
           { glyph: "🏅", label: "Earn tiers & badges" },
@@ -40,7 +46,7 @@ const tabsData = {
         title: "What you do?",
         subtitle: "Simple actions. Real impact.",
         variant: "pills",
-        heroEmoji: "▶️",
+        heroImage: "/images/phone.png",
         pills: [
           { glyph: "👁", label: "Watch" },
           { glyph: "✅", label: "Vote" },
@@ -48,10 +54,11 @@ const tabsData = {
         ],
       },
       {
-        number: "03",
+          number: "03",
         title: "How it works?",
         subtitle: "Your actions create better rankings",
         variant: "flow",
+        heroImage: "/images/RC.png",
         steps: [
           "Download app",
           "Open the app",
@@ -68,6 +75,7 @@ const tabsData = {
         number: "01",
         title: "Why promote?",
         variant: "list-detailed",
+         heroImage: "/images/Microphone.png",
         items: [
           {
             glyph: "🎯",
@@ -90,7 +98,7 @@ const tabsData = {
         number: "02",
         title: "What you can do?",
         variant: "numbered-list",
-        heroEmoji: "📣",
+         heroImage: "/images/Monitior.png",
         heroPosition: "bottom",
         items: ["Run campaigns.", "Target tiers.", "Sponsor trends."],
       },
@@ -98,7 +106,10 @@ const tabsData = {
         number: "03",
         title: "How it works?",
         variant: "list-detailed",
-        heroEmoji: "🚀",
+        
+        heroImage: "/images/phone.png",
+                heroImageClass: "h-30",
+
         items: [
           { glyph: "👤", label: "1. Create", description: "A brand account" },
           {
@@ -122,6 +133,8 @@ const tabsData = {
         number: "01",
         title: "Why upload?",
         variant: "list-detailed",
+                 heroImage: "/images/Microphone.png",
+
         items: [
           {
             glyph: "⚡",
@@ -144,7 +157,7 @@ const tabsData = {
         number: "02",
         title: "What tools you get?",
         variant: "numbered-list",
-        heroEmoji: "📣",
+        heroImage: "/images/Monitior.png",
         heroPosition: "bottom",
         items: ["Upload manager", "Performance dashboard", "Promotion toolkit"],
       },
@@ -152,7 +165,7 @@ const tabsData = {
         number: "03",
         title: "How it works?",
         variant: "list-detailed",
-        heroEmoji: "🏅",
+        heroImage: "/images/RC.png",
         items: [
           {
             glyph: "👤",
@@ -188,26 +201,24 @@ function ConnectorLine() {
     />
   );
 }
-
+ 
 export default function WhyRankcineTabs() {
   const [activeTab, setActiveTab] = useState("rankers");
   const content = tabsData[activeTab];
-
+ 
   return (
     <section className="mx-auto max-w-6xl px-6 py-16">
       <p className="mb-2 text-sm text-rc-gray-600">The problem we solve</p>
-
-      <h2
-        className="font-display text-4xl font-extrabold text-rc-purple-light sm:text-5xl"
-        style={{ WebkitTextStroke: "1px #6C5CE7", color: "#C9BFFF" }}
-      >
+ 
+      <OutlinedHeading className="text-5xl sm:text-6xl tracking-tight">
         Why RANKCINE ?
-      </h2>
-
+ 
+</OutlinedHeading>
+ 
       <p className="mt-3 max-w-2xl text-lg font-bold text-rc-black">
         {content.subheading}
       </p>
-
+ 
       {/* --- Tab pills --- */}
       <div className="mt-6 inline-flex rounded-pill bg-rc-purple-light/40 p-1">
         {tabOrder.map((tabKey) => {
@@ -228,7 +239,7 @@ export default function WhyRankcineTabs() {
           );
         })}
       </div>
-
+ 
       {/* --- Cards row ---
           key={activeTab} forces a fresh mount on every tab switch, so
           the Reveal fade-in replays each time instead of only once. */}
@@ -250,13 +261,20 @@ export default function WhyRankcineTabs() {
               {card.subtitle && (
                 <p className="mb-4 text-xs text-rc-gray-600">{card.subtitle}</p>
               )}
-
+ 
               {/* --- variant: "list" --- */}
               {card.variant === "list" && (
                 <>
-                  <div className="mb-4 flex h-24 items-center justify-center text-5xl transition-transform duration-300 group-hover:scale-110">
-                    {card.heroEmoji}
-                  </div>
+                  {card.heroImage && (
+                    <div className="relative mb-4 h-24 w-full transition-transform duration-300 group-hover:scale-110">
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
                   <ul className="relative mt-auto flex flex-col gap-3">
                     <ConnectorLine />
                     {card.items.map((item) => (
@@ -273,13 +291,22 @@ export default function WhyRankcineTabs() {
                   </ul>
                 </>
               )}
-
+ 
               {/* --- variant: "list-detailed" --- */}
               {card.variant === "list-detailed" && (
                 <>
-                  {card.heroEmoji && (
-                    <div className="mb-4 flex h-20 items-center justify-center text-5xl transition-transform duration-300 group-hover:scale-110">
-                      {card.heroEmoji}
+                  {card.heroImage && (
+                   <div
+  className={`relative mb-4 w-full transition-transform duration-300 group-hover:scale-110 ${
+    card.heroImageClass || "h-20"
+  }`}
+>
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                   )}
                   <ul className="relative mt-auto flex flex-col gap-4">
@@ -303,12 +330,19 @@ export default function WhyRankcineTabs() {
                   </ul>
                 </>
               )}
-
+ 
               {/* --- variant: "pills" --- */}
               {card.variant === "pills" && (
                 <div className="flex flex-1 items-center gap-4">
-                  <div className="flex h-28 flex-1 items-center justify-center rounded-xl bg-rc-purple text-4xl transition-transform duration-300 group-hover:scale-105">
-                    {card.heroEmoji}
+                  <div className="relative h-28 flex-1 overflow-hidden rounded-xl bg-rc-purple transition-transform duration-300 group-hover:scale-105">
+                    {card.heroImage && (
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
+                    )}
                   </div>
                   <ul className="flex flex-1 flex-col gap-2">
                     {card.pills.map((pill) => (
@@ -323,16 +357,21 @@ export default function WhyRankcineTabs() {
                   </ul>
                 </div>
               )}
-
+ 
               {/* --- variant: "numbered-list" ---
                   heroPosition controls whether the illustration
                   renders above or below the list (Publisher/Promoter
                   card 2 in the screenshot shows it BELOW). */}
               {card.variant === "numbered-list" && (
                 <>
-                  {card.heroEmoji && card.heroPosition !== "bottom" && (
-                    <div className="mb-4 flex h-20 items-center justify-center text-4xl transition-transform duration-300 group-hover:scale-110">
-                      {card.heroEmoji}
+                  {card.heroImage && card.heroPosition !== "bottom" && (
+                    <div className="relative mb-4 h-20 w-full transition-transform duration-300 group-hover:scale-110">
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                   )}
                   <ol className="flex flex-col gap-3">
@@ -350,19 +389,33 @@ export default function WhyRankcineTabs() {
                       </li>
                     ))}
                   </ol>
-                  {card.heroEmoji && card.heroPosition === "bottom" && (
-                    <div className="mt-4 flex h-24 items-center justify-center rounded-xl bg-rc-purple/90 text-4xl transition-transform duration-300 group-hover:scale-105">
-                      {card.heroEmoji}
+                  {card.heroImage && card.heroPosition === "bottom" && (
+                    <div className="relative mt-4 h-24 w-full overflow-hidden rounded-xl bg-rc-purple/90 transition-transform duration-300 group-hover:scale-105">
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                   )}
                 </>
               )}
-
+ 
               {/* --- variant: "flow" --- */}
               {card.variant === "flow" && (
                 <div className="flex flex-1 items-center gap-4">
-                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-rc-purple/40 text-2xl font-extrabold text-rc-purple transition-transform duration-500 group-hover:rotate-180">
-                    RC
+                  <div className="relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-rc-purple/40 transition-transform duration-500 group-hover:rotate-180">
+                    {card.heroImage ? (
+                      <Image
+                        src={card.heroImage}
+                        alt={card.title}
+                        fill
+                        className="object-contain"
+                      />
+                    ) : (
+                      <span className="text-2xl font-extrabold text-rc-purple">RC</span>
+                    )}
                   </div>
                   <ol className="flex flex-1 flex-col gap-2">
                     {card.steps.map((step, idx) => (

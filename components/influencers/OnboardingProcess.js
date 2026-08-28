@@ -1,12 +1,7 @@
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
-const applicationChecklist = [
-  { glyph: "👤", label: "Profile Information", bg: "bg-sky-100" },
-  { glyph: "▶️", label: "Content Samples", bg: "bg-pink-100" },
-  { glyph: "🔗", label: "Social Links", bg: "bg-violet-100" },
-  { glyph: "👥", label: "Audience Insights", bg: "bg-amber-100" },
-  { glyph: "🏆", label: "Achievements", bg: "bg-emerald-100" },
-];
+ 
 
 const evaluationPoints = [
   { glyph: "🛡️", title: "Fair Evaluation", description: "Every application is reviewed transparently." },
@@ -36,44 +31,14 @@ export default function OnboardingProcess() {
             trusted.
           </p>
         </Reveal>
-
-        {/* Application checklist mockup */}
-        <Reveal delay={150}>
-          <div className="relative mx-auto max-w-xs rounded-2xl bg-white p-4 shadow-xl transition-transform duration-300 hover:-translate-y-1">
-            <p className="mb-3 text-xs font-bold text-rc-black">
-              Influencer Application
-            </p>
-            <ul className="flex flex-col gap-2">
-              {applicationChecklist.map((item) => (
-                <li
-                  key={item.label}
-                  className="flex items-center gap-2 text-xs transition-transform duration-200 hover:translate-x-1"
-                >
-                  <span
-                    className={`flex h-6 w-6 items-center justify-center rounded-md text-xs ${item.bg}`}
-                  >
-                    {item.glyph}
-                  </span>
-                  <span className="flex-1 font-medium text-rc-black">
-                    {item.label}
-                  </span>
-                  <span className="text-emerald-500">✓</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Floating decorative cards */}
-            <span className="absolute -right-6 top-6 flex h-10 w-10 items-center justify-center rounded-lg bg-pink-500 text-white shadow-lg transition-transform duration-300 hover:scale-110">
-              ▶
-            </span>
-            <span className="absolute -right-10 top-1/2 flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500 text-white shadow-lg transition-transform duration-300 hover:scale-110">
-              🖼️
-            </span>
-            <span className="absolute -right-6 bottom-4 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-lg transition-transform duration-300 hover:scale-110">
-              ⬆️
-            </span>
-          </div>
-        </Reveal>
+ <Image
+      src="/images/influencer application.png"
+      alt="Trophy"
+      width={350}
+      height={350}
+      className="object-contain"
+    />
+        
       </div>
 
       {/* Evaluation points row */}

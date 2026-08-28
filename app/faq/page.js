@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+ 
 import WhyRankcineTabs from "@/components/faq/WhyRankcineTabs";
 
 // Lives at the /faq URL (this file's folder name IS the route —
@@ -7,9 +6,7 @@ import WhyRankcineTabs from "@/components/faq/WhyRankcineTabs";
 export default function FaqPage() {
   return (
     <main>
-      <Navbar />
-      <WhyRankcineTabs />
-      <Footer />
-    </main>
+       <WhyRankcineTabs />
+     </main>
   );
 }

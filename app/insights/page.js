@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import RankerView from "@/components/insights/RankerView";
 import PublisherView from "@/components/insights/PublisherView";
 import BrandView from "@/components/insights/BrandView";
@@ -11,8 +9,6 @@ import BrandView from "@/components/insights/BrandView";
 export default function InsightsPage() {
   return (
     <main>
-      <Navbar />
-
       <div className="mx-auto max-w-6xl px-6 pt-12">
         <h1 className="text-2xl font-extrabold text-rc-black">
           Insights &amp; Analytics
@@ -22,8 +18,6 @@ export default function InsightsPage() {
       <RankerView />
       <PublisherView />
       <BrandView />
-
-      <Footer />
     </main>
   );
 }

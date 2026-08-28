@@ -1,3 +1,4 @@
+"use client"
 import {
   CompassCircleIcon,
   TrendUpCircleIcon,
@@ -6,40 +7,50 @@ import {
   HeartCircleIcon,
   AwardCircleIcon,
 } from "./icons/FeatureIcons";
+import Image from "next/image";
+
 
 // Data for the 6 small feature cards. Same pattern as EcosystemRoles:
 // content lives in an array, JSX below just maps over it. To add a
 // 7th feature card later, just add one more object here.
+//
+// `underline` matches each card's underline accent to its icon color.
 const features = [
   {
     Icon: CompassCircleIcon,
     title: "Discover Better Content",
     description: "Surface gems through community signal.",
+    underline: "bg-sky-400",
   },
   {
     Icon: TrendUpCircleIcon,
     title: "Influence Rankings",
     description: "Your taste tilts the leaderboard.",
+    underline: "bg-violet-400",
   },
   {
     Icon: MegaphoneCircleIcon,
     title: "Promote Smarter",
     description: "Native ads inside ranked discovery.",
+    underline: "bg-emerald-400",
   },
   {
     Icon: FlameCircleIcon,
     title: "Grow Faster",
     description: "Climb tiers with engaged audiences.",
+    underline: "bg-pink-400",
   },
   {
     Icon: HeartCircleIcon,
     title: "Build Communities",
     description: "Rally fans around the content you love.",
+    underline: "bg-purple-500",
   },
   {
     Icon: AwardCircleIcon,
     title: "Earn Recognition",
     description: "Badges, streaks, and ranker tiers.",
+    underline: "bg-teal-400",
   },
 ];
 
@@ -61,21 +72,30 @@ export default function WhyRankcine() {
           </p>
         </div>
 
-        {/*
-          Illustration placeholder — the screenshot shows a custom
-          dashboard-style graphic (chart card + leaderboard + magnifier).
-          Replace this div with an <Image src="/images/why-rankcine.svg" />
-          once you export the real graphic from Figma.
-        */}
-        <div className="flex h-56 items-center justify-center rounded-2xl bg-gradient-to-br from-rc-purple-light to-white text-sm text-rc-gray-400">
-          [ illustration placeholder — export from Figma ]
+    
+        <div className="flex h-56 items-center justify-center  from-rc-purple-light to-white text-sm text-rc-gray-400">
+            <div className="absolute h-104 w-104">
+  <Image
+    src="/images/dashboardhome.png"
+    alt="Thinking character"
+    fill
+    className="object-contain"
+  />
+</div>
         </div>
       </div>
 
-      {/* Feature grid: 1 col mobile, 2 col tablet, 3 col desktop */}
-      <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div key={feature.title} className="flex items-start gap-4">
+      {/* Feature grid: 1 col mobile, 2 col tablet, 3 col desktop.
+          Each feature now sits inside its own card container
+          (white bg, rounded corners, soft shadow) instead of
+          floating directly in the grid. */}
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, i) => (
+          <div
+            key={feature.title}
+            className="group feature-card flex items-start gap-4 rounded-2xl bg-white p-5 shadow-md shadow-black/5 ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10"
+            style={{ animationDelay: `${i * 80}ms` }}
+          >
             <feature.Icon />
             <div>
               <h3 className="text-sm font-extrabold text-rc-black">
@@ -84,12 +104,34 @@ export default function WhyRankcine() {
               <p className="mt-1 text-xs text-rc-gray-600">
                 {feature.description}
               </p>
-              {/* Small underline accent, matches the screenshot */}
-              <span className="mt-2 block h-0.5 w-8 bg-rc-purple/40" />
+              {/* Underline accent — grows wider on hover */}
+              <span
+                className={`mt-2 block h-0.5 w-8 transition-all duration-300 ease-out group-hover:w-14 ${feature.underline}`}
+              />
             </div>
           </div>
         ))}
       </div>
+
+      {/* Staggered fade-up entrance for the feature cards on page load.
+          `animationDelay` above (set per-card via inline style) makes
+          them appear one after another instead of all at once. */}
+      <style jsx>{`
+        .feature-card {
+          opacity: 0;
+          animation: featureFadeUp 0.6s ease-out forwards;
+        }
+        @keyframes featureFadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }

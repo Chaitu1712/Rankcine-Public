@@ -1,4 +1,6 @@
 import { Sora, Inter } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const sora = Sora({
@@ -22,7 +24,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`}>
-      <body>{children}</body>
+       <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,5 +1,6 @@
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 // Each reason card. `flow` is the small 3-step mini-diagram inside
 // the card (e.g. YOU SHARE → RANKCINE GROWS → COMMUNITY JOINS), and
@@ -10,7 +11,13 @@ const reasons = [
     badgeColor: "bg-violet-600",
     title: "PROMOTE",
     titleColor: "text-violet-600",
-    heroGlyph: "📣",
+    heroGlyph:  <Image
+      src="/images/Microphone.png"
+      alt="Trophy"
+      width={150}
+      height={150}
+      className="object-contain"
+    />,
     flow: [
       { glyph: "👤", label: "YOU SHARE" },
       { glyph: "🅁", label: "RANKCINE GROWS" },
@@ -29,7 +36,13 @@ const reasons = [
     badgeColor: "bg-pink-500",
     title: "EARN",
     titleColor: "text-pink-500",
-    heroGlyph: "🏆",
+    heroGlyph:  <Image
+      src="/images/TrophyPink.png"
+      alt="Trophy"
+      width={130}
+      height={130}
+      className="object-contain"
+    />,
     flow: [
       { glyph: "📶", label: "PERFORMANCE TRACKED" },
       { glyph: "🎁", label: "REWARDS EARNED" },
@@ -48,7 +61,13 @@ const reasons = [
     badgeColor: "bg-violet-600",
     title: "COLLABORATE",
     titleColor: "text-violet-600",
-    heroGlyph: "🤝",
+    heroGlyph:  <Image
+      src="/images/collaborate.png"
+      alt="Trophy"
+      width={130}
+      height={130}
+      className="object-contain"
+    />,
     flow: [
       { glyph: "🏢", label: "BRANDS CONNECT" },
       { glyph: "🅁", label: "RANKCINE COLLABS" },

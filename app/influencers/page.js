@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+ 
 import InfluencerHero from "@/components/influencers/InfluencerHero";
 import WhyPartner from "@/components/influencers/WhyPartner";
 import BadgesSection from "@/components/influencers/BadgesSection";
@@ -17,8 +16,7 @@ import InfluencerForm from "@/components/influencers/InfluencerForm";
 export default function InfluencersPage() {
   return (
     <main>
-      <Navbar />
-      <InfluencerHero />
+       <InfluencerHero />
       <WhyPartner />
       <BadgesSection />
       <OnboardingProcess />
@@ -26,7 +24,6 @@ export default function InfluencersPage() {
       <OutcomeCards />
       <VerifiedCTA />
       <InfluencerForm />
-      <Footer />
-    </main>
+     </main>
   );
 }

@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
 const consistencyReasons = [
   "Improves your content discovery",
@@ -44,9 +45,15 @@ export default function PublishingScheme() {
             </div>
 
             {/* Calendar illustration placeholder */}
-            <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-rc-purple-light text-4xl transition-transform duration-300 hover:rotate-6">
-              📅
-            </div>
+            {/* Right: laptop upload mockup illustration */}
+<div className="relative flex h-64 w-64 items-center justify-center py-8">
+  <Image
+    src="/images/calender.png"
+    alt="Laptop upload mockup"
+    fill
+    className="object-contain"
+  />
+</div>
 
             <div className="rounded-2xl bg-rc-gray-50 p-4">
               <p className="mb-2 text-xs font-extrabold text-rc-black">

@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
 const outcomes = [
   {
@@ -74,9 +75,15 @@ export default function OutcomeCards() {
           {/* Trophy closing line */}
           <Reveal delay={200}>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-              <span className="flex h-20 w-20 items-center justify-center rounded-2xl bg-rc-purple-light text-4xl transition-transform duration-300 hover:rotate-6">
-                🏆
-              </span>
+              <span className="flex h-35 w-35 items-center justify-center rounded-2xl bg-rc-purple-light text-4xl transition-transform duration-300 hover:rotate-6">
+                
+               <Image
+      src="/images/TrophySimple.png"
+      alt="Trophy"
+      width={150}
+      height={150}
+      className="object-contain"
+    /></span>
               <div>
                 <h3 className="text-2xl font-extrabold leading-tight text-rc-purple">
                   Quality.

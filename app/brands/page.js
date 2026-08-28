@@ -1,8 +1,8 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+ 
 import BrandsHero from "@/components/brands/BrandsHero";
 import CampaignTools from "@/components/brands/CampaignTools";
 import ProvenImpact from "@/components/brands/ProvenImpact";
+import WhyBrandsLoveUs from "@/components/brands/WhyBrandsLoveUs";
 
 // Lives at the /brands URL (app/brands/page.js → "/brands").
 //
@@ -13,11 +13,10 @@ import ProvenImpact from "@/components/brands/ProvenImpact";
 export default function BrandsPage() {
   return (
     <main>
-      <Navbar />
-      <BrandsHero />
+       <BrandsHero />
       <CampaignTools />
+      <WhyBrandsLoveUs/>
       <ProvenImpact />
-      <Footer />
-    </main>
+     </main>
   );
 }

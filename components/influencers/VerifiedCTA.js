@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
 const quickSteps = [
   { glyph: "📋", bg: "bg-violet-100", title: "Fill the Influencer Form", description: "Share your details, content niche, and social media links." },
@@ -68,9 +69,13 @@ export default function VerifiedCTA() {
 
           {/* Clipboard illustration placeholder */}
           <div className="flex flex-col items-center gap-4">
-            <div className="flex h-56 w-56 items-center justify-center rounded-3xl bg-white text-7xl shadow-xl transition-transform duration-500 hover:scale-105">
-              📋🛡️
-            </div>
+            <Image
+      src="/images/verifiedinfluencer.png"
+      alt="Trophy"
+      width={450}
+      height={450}
+      className="object-contain"
+    />
             <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-rc-purple-light text-sm">
                 👥

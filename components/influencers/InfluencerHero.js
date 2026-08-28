@@ -1,5 +1,7 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
+
 
 export default function InfluencerHero() {
   return (
@@ -32,7 +34,13 @@ export default function InfluencerHero() {
             Figma export once available. */}
         <Reveal delay={150}>
           <div className="flex h-56 items-center justify-center text-8xl transition-transform duration-500 hover:scale-105">
-            🤝
+             <Image
+      src="/images/handshake.png"
+      alt="Trophy"
+      width={400}
+      height={400}
+      className="object-contain"
+    />
           </div>
         </Reveal>
       </div>

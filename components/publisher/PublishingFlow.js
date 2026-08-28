@@ -93,19 +93,7 @@ export default function PublishingFlow() {
         </div>
       </Reveal>
 
-      {/* Closing app-store CTA */}
-      <Reveal delay={200}>
-        <div className="mt-10 flex justify-center">
-          <div className="flex flex-wrap justify-center gap-4 rounded-3xl bg-cyan-50 px-8 py-6">
-            <Button variant="black" className="gap-2 transition-transform duration-200 hover:scale-105">
-              <span aria-hidden></span> Download on App Store
-            </Button>
-            <Button variant="black" className="gap-2 transition-transform duration-200 hover:scale-105">
-              <span aria-hidden>▶</span> Get it on Google Play
-            </Button>
-          </div>
-        </div>
-      </Reveal>
+      
     </section>
   );
 }

@@ -1,16 +1,14 @@
 "use client";
 
-// "Start" and "About" behave like two different views of the Ranker
-// page. The screenshots only show the "About" tab's content (What You
-// See / What You Do / What You Get), so "Start" is a placeholder CTA
-// for now — replace with real onboarding content once that's designed.
-
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
-import Button from "@/components/ui/Button";
+import OutlinedHeading from "@/components/ui/OutlinedHeading";
 import WhatYouSee from "./WhatYouSee";
 import WhatYouDo from "./WhatYouDo";
 import WhatYouGet from "./WhatYouGet";
+import StartActions from "./StartActions";
+import StartPerks from "./StartPerks";
+import RankingsPower from "./RankingsPower";
 
 export default function RankerIntro() {
   const [activeTab, setActiveTab] = useState("about");
@@ -20,12 +18,14 @@ export default function RankerIntro() {
       <Reveal>
         <p className="mb-2 text-sm text-rc-gray-600">How it works</p>
 
-        <h1
-          className="font-display text-4xl font-extrabold text-rc-black sm:text-5xl"
-          style={{ textShadow: "0 0 24px rgba(147,51,234,0.3)" }}
+        <OutlinedHeading
+          as="h1"
+          className="text-4xl tracking-tight sm:text-5xl"
+          strokeColor="#6C5CE7"
+          fillColor="#C9BFFF"
         >
-          From passion to <span className="text-rc-purple">recognition</span>
-        </h1>
+          From passion to recognition
+        </OutlinedHeading>
 
         <p className="mt-2 text-lg font-bold text-rc-purple-dark">
           Upload. Rank. Earn.
@@ -71,21 +71,11 @@ export default function RankerIntro() {
         )}
 
         {activeTab === "start" && (
-          <Reveal>
-            {/* TODO: replace with real "Start" / getting-started content
-                once that part of the Figma file is available. */}
-            <div className="flex flex-col items-center gap-4 rounded-3xl bg-rc-purple-light/20 p-16 text-center">
-              <p className="text-lg font-extrabold text-rc-black">
-                Ready to start ranking?
-              </p>
-              <p className="max-w-sm text-sm text-rc-gray-600">
-                Download the app and cast your first vote in under a minute.
-              </p>
-              <Button variant="purple" className="transition-transform duration-200 hover:scale-105">
-                Get Started →
-              </Button>
-            </div>
-          </Reveal>
+          <>
+            <StartActions />
+            <StartPerks />
+            <RankingsPower />
+          </>
         )}
       </div>
     </section>

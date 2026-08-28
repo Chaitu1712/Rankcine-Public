@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import Image from "next/image";
 
 // Small feature row under the hero copy (Verified Platform, Global
 // Visibility, etc). Data-driven so adding a 5th item is one line.
@@ -105,53 +106,16 @@ export default function PublisherHero() {
             </div>
           </div>
 
-          {/* Right: laptop upload mockup — placeholder graphic.
-              Replace this whole block with the real illustration
-              exported from Figma once available; the surrounding
-              layout (content cards left, destination bubbles right)
-              won't need to change. */}
-          <div className="relative flex items-center justify-center gap-4 py-8">
-            {/* Floating content-type cards */}
-            <div className="flex flex-col gap-2">
-              {uploadPreviewCards.map((card) => (
-                <div
-                  key={card.label}
-                  className={`flex h-9 w-24 items-center justify-center rounded-lg text-[10px] font-bold text-white shadow-md transition-transform duration-300 hover:scale-105 ${card.color}`}
-                >
-                  ▶ {card.label}
-                </div>
-              ))}
-            </div>
-
-            {/* Laptop / upload card placeholder */}
-            <div className="flex h-40 w-48 flex-col items-center justify-center rounded-xl border-2 border-rc-black bg-white shadow-xl transition-transform duration-300 hover:scale-105">
-              <span className="text-3xl">☁️⬆️</span>
-              <p className="mt-2 text-[11px] font-bold text-rc-black">
-                Uploading... 80%
-              </p>
-              <div className="mt-1 h-1.5 w-32 overflow-hidden rounded-pill bg-rc-gray-100">
-                <div className="h-full w-4/5 rounded-pill bg-rc-purple" />
-              </div>
-              <p className="mt-2 text-[10px] font-bold text-rc-purple-dark">
-                RankCine
-              </p>
-            </div>
-
-            {/* Destination bubbles */}
-            <div className="flex flex-col gap-3">
-              {destinations.map((dest) => (
-                <div
-                  key={dest.label}
-                  className="flex flex-col items-center gap-1 rounded-full bg-white p-3 text-center shadow-md transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <span className="text-lg">{dest.glyph}</span>
-                  <span className="w-16 text-[9px] font-semibold text-rc-gray-600">
-                    {dest.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+         {/* Right: laptop upload mockup illustration */}
+<div className="relative flex h-94 items-center justify-center py-8">
+  <Image
+    src="/images/PublisherTop.png"
+    alt="Laptop upload mockup"
+    fill
+    className="object-contain"
+  />
+</div>
+          
         </div>
       </Reveal>
 

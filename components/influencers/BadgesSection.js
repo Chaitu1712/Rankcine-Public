@@ -1,5 +1,7 @@
 import Reveal from "@/components/ui/Reveal";
 
+import Image from "next/image";
+
 const badges = [
   {
     label: "TASTEMAKER",
@@ -48,11 +50,17 @@ export default function BadgesSection() {
         </Reveal>
 
         {/* Megaphone illustration placeholder */}
-        <Reveal delay={100}>
-          <div className="flex h-32 items-center justify-center text-7xl transition-transform duration-500 hover:-rotate-6">
-            📣
-          </div>
-        </Reveal>
+       <Reveal delay={100}>
+  <div className="flex h-32 items-center justify-center transition-transform duration-500 hover:-rotate-6">
+    <Image
+      src="/images/horn.png"
+      alt="Trophy"
+      width={280}
+      height={280}
+      className="object-contain"
+    />
+  </div>
+</Reveal>
       </div>
 
       <Reveal delay={100}>

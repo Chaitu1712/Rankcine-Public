@@ -1,5 +1,4 @@
 import PhoneMockup from "./PhoneMockup";
-import FloatingCards from "./FloatingCards";
 
 export default function Hero() {
   return (
@@ -55,8 +54,16 @@ export default function Hero() {
       {/* Center: phone mockup */}
       <PhoneMockup />
 
-      {/* Right: floating cards */}
-      <FloatingCards />
+      {/* Right: trophy image */}
+    <div className="relative hidden h-[520px] w-[250px] lg:block">
+  <img
+    src="/images/trophy.png"
+    alt="Top ranked creator"
+    width={220}
+    height={420}
+    className="absolute right-0 top-28 h-auto w-auto object-contain"
+  />
+</div>
     </section>
   );
 }
