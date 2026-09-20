@@ -1,13 +1,17 @@
 "use client";
 
-// This is a REAL, working form component (controlled inputs, submit
-// handling) — but there's no backend yet, so handleSubmit below just
-// logs the data and shows a placeholder alert. Once you have an API
-// route or backend service to send this to, replace the body of
-// handleSubmit with an actual fetch() call — the form fields and
-// state management here won't need to change.
+// components/influencers/InfluencerForm.js
+//
+// Real, working form: controlled inputs, submit handling, plus the two
+// client-side pieces of the security checklist:
+//   - a hidden honeypot field bots tend to fill in
+//   - a Cloudflare Turnstile captcha widget, whose token gets sent to the
+//     server and verified there before anything is saved
+//
+ 
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import Script from "next/script";
 import Reveal from "@/components/ui/Reveal";
 
 const socialPlatforms = [
@@ -30,39 +34,87 @@ const initialFormState = {
   audienceRange: "",
   about: "",
   whyJoin: "",
+  // Honeypot — real users never see this field. Any real fill-in on submit
+  // tells the server it's almost certainly a bot.
+  website: "",
 };
 
 export default function InfluencerForm() {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileWidgetRef = useRef(null);
+  const turnstileIdRef = useRef(null);
 
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
+  // Register the global callback Turnstile calls once a person passes the
+  // challenge. Must exist on `window` before the widget script runs it.
+  useEffect(() => {
+  if (!turnstileReady || !turnstileWidgetRef.current || !window.turnstile) {
+    return;
+  }
+  if (turnstileIdRef.current) return;
+
+  turnstileIdRef.current = window.turnstile.render(turnstileWidgetRef.current, {
+    sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+    callback: (token) => setTurnstileToken(token),
+    "expired-callback": () => setTurnstileToken(""),
+  });
+}, [turnstileReady]);
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      alert("Please complete the captcha before submitting.");
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // TODO: replace with a real API call once the backend exists, e.g.
-    //   await fetch("/api/influencer-applications", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(formData),
-    //   });
-    console.log("Influencer application (not yet sent anywhere):", formData);
+    try {
+      const res = await fetch("/api/influencer-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, turnstileToken }),
+      });
 
-    // Fake network delay so the button's loading state is visible —
-    // remove this once a real request is wired in.
-    await new Promise((resolve) => setTimeout(resolve, 800));
+      const result = await res.json();
 
-    setIsSubmitting(false);
-    alert("Form captured locally — backend not connected yet.");
+      if (!res.ok || !result.success) {
+        alert(result.message || "Something went wrong. Please try again.");
+        return;
+      }
+
+      alert("Application submitted successfully!");
+      setFormData(initialFormState);
+      setTurnstileToken("");
+      // Reset the widget so a second submission needs a fresh token
+      if (window.turnstile && turnstileIdRef.current) {
+        window.turnstile.reset(turnstileIdRef.current);
+      }
+    } catch (error) {
+      console.error("Network or unexpected error submitting form:", error);
+      alert("Network error — please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16">
+<section id="influencer-form" className="mx-auto max-w-4xl px-6 py-16">
+        {/* Loads the Turnstile widget script once, client-side only */}
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="afterInteractive"
+        onLoad={() => setTurnstileReady(true)}
+      />
+
       <Reveal>
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="text-4xl">📋✏️</span>
@@ -89,6 +141,27 @@ export default function InfluencerForm() {
           <p className="mb-6 text-center text-sm font-bold text-rc-purple">
             Influencer Onboarding Form (Sample)
           </p>
+
+          {/* --------------------------------------------------------- */}
+          {/* Honeypot field — hidden from real users via off-screen     */}
+          {/* positioning (not display:none, which some bots detect and */}
+          {/* skip). Real visitors will never see or fill this in.       */}
+          {/* --------------------------------------------------------- */}
+          <div
+            style={{ position: "absolute", left: "-9999px" }}
+            aria-hidden="true"
+          >
+            <label htmlFor="website">Website</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website}
+              onChange={handleChange}
+            />
+          </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Full Name *">
@@ -232,7 +305,7 @@ export default function InfluencerForm() {
                 value={formData.about}
                 onChange={handleChange}
                 required
-                placeholder="Share your journey, content style and what makes you unique..."
+                placeholder="Share your journey, content style and what makes you unique... (min 10 characters)"
                 className="input-field"
               />
             </Field>
@@ -246,10 +319,15 @@ export default function InfluencerForm() {
                 value={formData.whyJoin}
                 onChange={handleChange}
                 required
-                placeholder="Your answer..."
+                placeholder="Your answer... (min 10 characters)"
                 className="input-field"
               />
             </Field>
+          </div>
+
+          {/* Turnstile captcha widget renders into this div */}
+          <div className="mt-6 flex justify-center">
+            <div ref={turnstileWidgetRef} />
           </div>
 
           <button
@@ -262,10 +340,6 @@ export default function InfluencerForm() {
         </form>
       </Reveal>
 
-      {/* Scoped styles for the repeated input look, since we have ~10
-          inputs all sharing the same appearance. Using a plain <style>
-          block here rather than repeating this className string 10
-          times keeps the form JSX readable. */}
       <style jsx>{`
         :global(.input-field) {
           width: 100%;

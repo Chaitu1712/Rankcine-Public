@@ -1,12 +1,23 @@
 import Button from "@/components/ui/Button";
-
+import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+ 
 // Each column in the footer's link grid. Storing these as data means
 // adding a new link is just adding a string to an array — you never
 // need to touch the JSX layout below.
 const linkColumns = [
   {
     title: "EXPLORE",
-    links: ["Home", "FAQ", "Publisher", "Ranker", "Brand", "Influencer", "Insights", "Pricing"],
+    links: [
+      "Home",
+      "FAQ",
+      "Publisher",
+      "Ranker",
+      "Brand",
+      "Influencer",
+      "Insights",
+      "Pricing",
+    ],
   },
   {
     title: "HELP & GUIDE",
@@ -22,7 +33,13 @@ const linkColumns = [
   },
   {
     title: "CONTACT",
-    links: ["Contact Us", "Partnerships", "Press & Media", "Advertising", "Feedback"],
+    links: [
+      "Contact Us",
+      "Partnerships",
+      "Press & Media",
+      "Advertising",
+      "Feedback",
+    ],
   },
   {
     title: "LEGAL",
@@ -43,6 +60,14 @@ const stats = [
   { value: "480K", label: "DAILY VOTES" },
   { value: "38K", label: "CREATORS" },
   { value: "120+", label: "COUNTRIES" },
+];
+
+// Social links shown in the bottom bar.
+const socials = [
+  { icon: FaInstagram, href: "https://www.instagram.com/rankcine_?igsi=MTJzcW1xdmVhY2lxaQ%3D%3D&utm_source=qr", label: "Instagram" },
+  { icon: FaXTwitter, href: "https://x.com/rankcine_1?s=11", label: "X" },
+  { icon: FaYoutube, href: "https://youtube.com/@rankcine_1?si=gtvRW3ZfzpU92m0e", label: "YouTube" },
+  { icon: FaFacebook, href: "https://facebook.com/yourhandle", label: "Facebook" },
 ];
 
 export default function Footer() {
@@ -115,20 +140,23 @@ export default function Footer() {
 
       {/* --- Bottom bar: made-with-love note + social icons --- */}
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 sm:flex-row">
-        <p className="text-xs text-rc-gray-600">
-          Made with <span className="text-rc-purple">♥</span> for creators and
-          content lovers.
-        </p>
+         <p className="text-xs text-rc-gray-600">
+    &copy; {new Date().getFullYear()} Rankcine. All rights reserved. This
+    product and its content are protected by copyright law.
+  </p>
+
         <div className="flex gap-3">
-          {/* Replace these letters with real react-icons / lucide-react
-              icons once that package is installed. */}
-          {["IG", "TW", "YT", "IN"].map((social) => (
-            <span
-              key={social}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-rc-purple-light text-[10px] font-bold text-rc-purple-dark"
+          {socials.map(({ icon: Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-rc-purple-light text-rc-purple-dark transition-colors hover:bg-rc-purple-dark hover:text-white"
             >
-              {social}
-            </span>
+              <Icon size={16} />
+            </a>
           ))}
         </div>
       </div>

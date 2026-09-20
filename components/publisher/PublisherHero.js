@@ -107,7 +107,7 @@ export default function PublisherHero() {
           </div>
 
          {/* Right: laptop upload mockup illustration */}
-<div className="relative flex h-94 items-center justify-center py-8">
+<div className="relative w-full aspect-[16/9]">
   <Image
     src="/images/PublisherTop.png"
     alt="Laptop upload mockup"

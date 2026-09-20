@@ -74,10 +74,10 @@ export default function WhyRankcine() {
 
     
         <div className="flex h-56 items-center justify-center  from-rc-purple-light to-white text-sm text-rc-gray-400">
-            <div className="absolute h-104 w-104">
+            <div className="absolute h-94 w-94">
   <Image
     src="/images/dashboardhome.png"
-    alt="Thinking character"
+    alt="calender"
     fill
     className="object-contain"
   />

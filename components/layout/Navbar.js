@@ -13,7 +13,7 @@ const navLinks = [
   { label: "RANKER", href: "/ranker" },
   { label: "BRANDS", href: "/brands" },
   { label: "INFLUENCERS", href: "/influencers" },
-  { label: "INSIGHTS", href: "/insights" },
+  // { label: "INSIGHTS", href: "/insights" },
   { label: "PRICING", href: "/pricing" },
 ];
 

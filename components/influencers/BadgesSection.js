@@ -51,15 +51,14 @@ export default function BadgesSection() {
 
         {/* Megaphone illustration placeholder */}
        <Reveal delay={100}>
-  <div className="flex h-32 items-center justify-center transition-transform duration-500 hover:-rotate-6">
-    <Image
-      src="/images/horn.png"
-      alt="Trophy"
-      width={280}
-      height={280}
-      className="object-contain"
-    />
-  </div>
+ <div className="relative h-62 w-62 transition-transform duration-500 hover:-rotate-6">
+  <Image
+    src="/images/horn.png"
+    alt="Trophy"
+    fill
+    className="object-contain"
+  />
+</div>
 </Reveal>
       </div>
 

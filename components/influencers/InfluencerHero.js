@@ -21,13 +21,14 @@ export default function InfluencerHero() {
             Promote our platform and build real influence inside a
             ranking-first community.
           </p>
+<a href="#influencer-form">
 
           <Button
             variant="outline-purple"
             className="mt-6 transition-transform duration-200 hover:scale-105"
           >
             Join as INFLUENCER →
-          </Button>
+          </Button></a>
         </Reveal>
 
         {/* Handshake illustration placeholder — swap for the real
