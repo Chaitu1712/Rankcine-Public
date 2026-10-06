@@ -55,32 +55,6 @@ export default function Library() {
             </div>
           ))}
         </div>
-
-        {/* Side illustration + nav buttons.
-            The character illustration is a placeholder — replace with
-            the real PNG/SVG export from Figma once available. */}
-        <div className="flex w-full flex-col items-center gap-4 sm:w-40">
-          <div className="flex h-32 w-32 items-center justify-center rounded-full bg-rc-gray-100 text-xs text-rc-gray-400">
-           <div className="relative left-3 bottom-7 h-64 w-64">
-  <Image
-    src="/images/thinking-girl.png"
-    alt="Thinking character"
-    fill
-    className="object-contain"
-  />
-</div>
-          </div>
-
-          <Button variant="outline-purple" className="w-full">
-            View All →
-          </Button>
-          <Button
-            variant="outline-purple"
-            className="w-full bg-rc-purple-light/60"
-          >
-            ← Back
-          </Button>
-        </div>
       </div>
     </section>
   );

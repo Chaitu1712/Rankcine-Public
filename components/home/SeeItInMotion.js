@@ -6,7 +6,7 @@ const HERO_VIDEO_ID = "dQw4w9WgXcQ";
 
 export default function SeeItInMotion() {
   return (
-    <section className="mx-auto max-w-5xl px-6 py-16">
+    <section className="mx-auto max-w-5xl px-6 py-16" id="demo">
       <p className="mb-2 text-sm text-rc-gray-600">How it works</p>
 
       <h2 className="font-display text-5xl font-extrabold text-rc-black sm:text-6xl">

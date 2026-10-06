@@ -1,0 +1,16 @@
+# Rank Cine
+> AI-Native Content Discovery & Evaluation Ecosystem
+
+Rank Cine is a multi-sided entertainment platform connecting content creators, evaluating consumers (Rankers), and brand sponsors.
+
+## How It Works
+- **For Consumers (Rankers):** Users evaluate movies, songs, and media across granular technical parameters. Using a 0.5 Consensus Math Engine, users who align with the true crowd consensus peak unlock cryptographic sponsor vouchers (Rate-to-Earn).
+- **For Studios (Publishers):** Creators upload content to `studio.rankcine.com`. Media is instantly pre-evaluated by Google Gemini AI across 12-13 technical metrics. Studios receive deep demographic insights and real-time performance radar charts.
+- **For Brands (Sponsors):** Brands fund "Lucky Draws" attached to media items. Vouchers are distributed strictly to accurate users, eliminating bot fraud and review-bombing.
+
+## Key Links
+- Official Website: https://rankcine.com
+- Producer Studio: https://studio.rankcine.com
+- Privacy Policy: https://rankcine.com/privacy
+- Terms of Service: https://rankcine.com/terms
+- Contact: support@rankcine.com

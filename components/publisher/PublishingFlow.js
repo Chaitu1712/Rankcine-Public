@@ -1,36 +1,35 @@
 import Reveal from "@/components/ui/Reveal";
-import Button from "@/components/ui/Button";
 
 const flowSteps = [
   {
     number: "01",
     glyph: "⬆️",
     title: "Upload Content",
-    items: ["Video", "Poster", "Metadata", "Description"],
+    items: ["Video / Song / Poster", "Title & Metadata", "Content Type"],
   },
   {
     number: "02",
-    glyph: "🛡️",
-    title: "Admin Verification",
-    items: ["Review", "Quality", "Copyright", "Standards", "Metadata Check"],
+    glyph: "🤖",
+    title: "Gemini AI Pre-Eval",
+    items: ["12 Technical Parameters", "Pacing & Visuals Analysis", "Originality & Audio Score", "Content Safety Rating"],
   },
   {
     number: "03",
     glyph: "🗄️",
     title: "Published",
-    items: ["Visible on RankCine", "Added to Discovery Feed", "Available for Ranking"],
+    items: ["Visible on RankCine", "Added to Discovery Feed", "Available for Audience Audit"],
   },
   {
     number: "04",
     glyph: "👥",
-    title: "Community Engagement",
-    items: ["Rankers vote", "Influencers promote", "Brands discover", "Audience interacts"],
+    title: "Community Consensus",
+    items: ["Rankers vote", "Influencers promote", "0.5 Binning occurs", "Consensus Peak forms"],
   },
   {
     number: "05",
     glyph: "🏆",
-    title: "Performance",
-    items: ["Insights", "Reach", "Ranking", "Growth", "Badges"],
+    title: "Analytics & Growth",
+    items: ["Live Radar Charts", "Demographic Insights", "Reward Campaign Tracking"],
   },
 ];
 
@@ -68,19 +67,18 @@ export default function PublishingFlow() {
                     {step.title}
                   </h4>
 
-                  <ul className="mt-2 flex flex-col gap-1 text-left">
+                  <ul className="mt-2 flex flex-col gap-1 text-left w-full pl-2">
                     {step.items.map((item) => (
                       <li
                         key={item}
-                        className="flex items-center gap-1 text-[11px] text-rc-gray-600"
+                        className="flex items-start gap-1 text-[11px] text-rc-gray-600 leading-tight"
                       >
-                        <span className="text-emerald-500">✓</span> {item}
+                        <span className="text-emerald-500 font-bold shrink-0">✓</span>
+                        <span className="flex-1">{item}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* Connector arrow between cards, hidden on last card
-                      and hidden below lg (mobile stacks vertically) */}
                   {i < flowSteps.length - 1 && (
                     <span className="absolute right-[-18px] top-1/2 hidden -translate-y-1/2 text-lg text-rc-purple transition-transform duration-300 group-hover:translate-x-1 lg:block">
                       →
@@ -92,8 +90,6 @@ export default function PublishingFlow() {
           </div>
         </div>
       </Reveal>
-
-      
     </section>
   );
 }

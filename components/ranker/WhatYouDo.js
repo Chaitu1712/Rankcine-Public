@@ -1,8 +1,5 @@
 "use client";
 
-// This section has one small interactive piece (picking a content
-// type in "Rank as Per Your Choice"), so it needs "use client".
-
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
 
@@ -11,24 +8,24 @@ const contentChoices = [
   { key: "webSeries", glyph: "📺", label: "Web Series" },
   { key: "shortFilms", glyph: "🎞️", label: "Short Films" },
   { key: "videos", glyph: "▶️", label: "Videos" },
-  { key: "creators", glyph: "👤", label: "Creators" },
+  { key: "creators", glyph: "🎵", label: "Audio / Songs" },
 ];
 
 const evaluationFactors = [
-  { glyph: "⭐", label: "Content Quality", bg: "bg-violet-100" },
-  { glyph: "❤️", label: "Engagement", bg: "bg-pink-100" },
-  { glyph: "🎯", label: "Relevance", bg: "bg-sky-100" },
-  { glyph: "👥", label: "Audience Impact", bg: "bg-emerald-100" },
-  { glyph: "📈", label: "Consistency", bg: "bg-amber-100" },
-  { glyph: "🛡️", label: "Authenticity", bg: "bg-indigo-100" },
+  { glyph: "👁️", label: "Visuals", bg: "bg-violet-100" },
+  { glyph: "⏱️", label: "Pacing", bg: "bg-pink-100" },
+  { glyph: "✨", label: "Originality", bg: "bg-sky-100" },
+  { glyph: "🎵", label: "Audio", bg: "bg-emerald-100" },
+  { glyph: "📖", label: "Narrative", bg: "bg-amber-100" },
+  { glyph: "⚙️", label: "Technical Execution", bg: "bg-indigo-100" },
 ];
 
 const actionFlow = [
-  { glyph: "👁", label: "You Rank", bg: "bg-violet-100" },
-  { glyph: "📈", label: "Content Climbs", bg: "bg-emerald-100" },
-  { glyph: "👥", label: "More Visibility", bg: "bg-pink-100" },
-  { glyph: "⭐", label: "Creators Grow", bg: "bg-amber-100" },
-  { glyph: "🏆", label: "Community Wins", bg: "bg-violet-100" },
+  { glyph: "👁", label: "You Audit", bg: "bg-violet-100" },
+  { glyph: "🤖", label: "AI Verifies", bg: "bg-emerald-100" },
+  { glyph: "📊", label: "Consensus Forms", bg: "bg-pink-100" },
+  { glyph: "📈", label: "Content Climbs", bg: "bg-amber-100" },
+  { glyph: "🎟️", label: "You Earn", bg: "bg-violet-100" },
 ];
 
 export default function WhatYouDo() {
@@ -49,7 +46,7 @@ export default function WhatYouDo() {
         </h3>
         <span className="mt-1 block h-0.5 w-8 bg-rc-purple" />
         <p className="mt-2 text-xs text-rc-gray-600">
-          Choose what you love. Rank what matters.
+          Choose what you love. Audit what matters.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-3">
@@ -87,13 +84,13 @@ export default function WhatYouDo() {
       <Reveal delay={100}>
         <div className="mt-12">
           <h3 className="text-xl font-extrabold text-rc-black">
-            We Evaluate
+            Granular Technical
             <br />
-            What Matters
+            Audits
           </h3>
           <span className="mt-1 block h-0.5 w-8 bg-rc-purple" />
           <p className="mt-2 text-xs text-rc-gray-600">
-            Transparent factors that determine every rank.
+            You don't just leave a 5-star review. You evaluate content across technical parameters.
           </p>
 
           <div className="mt-4 flex flex-wrap gap-4">
@@ -117,12 +114,12 @@ export default function WhatYouDo() {
       <Reveal delay={200}>
         <div className="mt-12">
           <h3 className="text-xl font-extrabold text-rc-black">
-            Your Action.
+            The 0.5 Consensus
             <br />
-            Real Impact.
+            Math
           </h3>
-          <p className="mt-2 max-w-sm text-xs text-rc-gray-600">
-            Your rankings influence trends, visibility and recognition.
+          <p className="mt-2 max-w-sm text-xs text-rc-gray-600 leading-relaxed">
+            Your ratings are mathematically binned into 0.5 steps to find the <strong>Crowd Consensus Peak</strong>. Hit the top 10% accuracy tier, and mathematically unlock brand sponsor vouchers. No bots. No review bombing. Just pure accuracy.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-2">

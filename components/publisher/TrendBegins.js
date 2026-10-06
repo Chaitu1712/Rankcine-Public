@@ -71,16 +71,16 @@ export default function TrendBegins() {
                 You Create. <span className="text-rc-purple">We Amplify.</span>
               </h3>
 
-             <div className="mt-6 flex items-start gap-4">
-  <div className="relative w-full max-w-md aspect-[4/3]">
-    <Image
-      src="/images/upload.png"
-      alt="Laptop upload mockup"
-      fill
-      className="object-contain object-top"
-    />
-  </div>
-</div>
+              <div className="mt-6 flex items-start gap-4">
+                <div className="relative w-full max-w-md aspect-[4/3]">
+                  <Image
+                    src="/images/upload.png"
+                    alt="Laptop upload mockup"
+                    fill
+                    className="object-contain object-top"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Right: Publisher Dashboard mockup */}

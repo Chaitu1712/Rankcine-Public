@@ -1,0 +1,19 @@
+# Rank Cine - Full Technical Documentation
+
+## Core Mechanics
+1. **0.5 Consensus Engine:** 
+   Ratings are binned into 0.5 increments. The system mathematically identifies the "Mode" (most frequent rating bin). Consumers whose ratings align with the community peak win the lucky draw. This mathematically prevents review bombing.
+   
+2. **Multimodal AI Evaluation:**
+   Consumers can submit Voice, Video, or Text reviews. The backend utilizes Google Gemini 1.5 Flash and Pro to transcribe, synthesize narrative summaries, and assign an AI Quality Score (0-100) and Sentiment Score (0.0-10.0).
+
+3. **Content Safety:**
+   Gemini AI actively monitors all feedback for Toxicity, Profanity, and Harassment, automatically flagging severe infractions into a Super Admin Moderation Queue.
+
+## Portals
+- **Public Site:** https://rankcine.com (Information and lead generation)
+- **Producer Studio:** https://studio.rankcine.com (Analytics, Media Upload, Campaign Generation)
+- **Mobile App:** Available soon for iOS and Android.
+
+## Compliance
+Rank Cine operates under the guidelines of the Digital Personal Data Protection Act, 2023 (DPDP) and IT Act 2000 (India). All data is processed securely with explicit user consent.

@@ -1,4 +1,3 @@
- 
 import InfluencerHero from "@/components/influencers/InfluencerHero";
 import WhyPartner from "@/components/influencers/WhyPartner";
 import BadgesSection from "@/components/influencers/BadgesSection";
@@ -8,15 +7,16 @@ import OutcomeCards from "@/components/influencers/OutcomeCards";
 import VerifiedCTA from "@/components/influencers/VerifiedCTA";
 import InfluencerForm from "@/components/influencers/InfluencerForm";
 
-// Lives at the /influencers URL (app/influencers/page.js → "/influencers").
-//
-// NOTE: the "Watch. Rank. Be Heard." + App Store/Google Play block at
-// the very bottom of the screenshots is NOT rebuilt here — it's the
-// same shared Footer component every other page uses.
+export const metadata = {
+  title: "Verified Influencer Program | Rank Cine",
+  description: "Promote Rank Cine, build real influence inside a ranking-first community, and collaborate with top brands.",
+  alternates: { canonical: 'https://rankcine.com/influencers' }
+};
+
 export default function InfluencersPage() {
   return (
     <main>
-       <InfluencerHero />
+      <InfluencerHero />
       <WhyPartner />
       <BadgesSection />
       <OnboardingProcess />
@@ -24,6 +24,6 @@ export default function InfluencersPage() {
       <OutcomeCards />
       <VerifiedCTA />
       <InfluencerForm />
-     </main>
+    </main>
   );
 }

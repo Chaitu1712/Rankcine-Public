@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   WatchLineIcon,
@@ -10,20 +11,12 @@ import {
   CloudUploadLineIcon,
 } from "./icons/RoleIcons";
 
-// Each entry below is ONE full card in the "Three sides of the
-// ecosystem" section. Everything about a card — its color theme,
-// heading, bullet list, and button — is defined here as data, so
-// adding a 4th role later is just adding one more object, not writing
-// new JSX.
-//
-// `illustration` is left as a slot — drop your own SVG/PNG component
-// or <img> in there per card once you have the assets.
 const roles = [
   {
     number: "01",
     badgeColor: "bg-rc-purple-dark",
     haloGradient: "from-sky-200 via-cyan-100 to-violet-200",
-    cardBg: "bg-[#F7F5FF]", // flat, solid — no gradient/opacity stacking
+    cardBg: "bg-[#F7F5FF]", 
     titleText: "text-rc-purple-dark",
     tagBg: "bg-[#E7E2FB]",
     tagText: "text-rc-purple-dark",
@@ -40,17 +33,19 @@ const roles = [
     ],
     buttonLabel: "I WANT TO RANK →",
     buttonVariant: "pill-purple",
+    href: "/coming-soon",
+    isExternal: false,
     illustration: (
-     <div className="   w-[200px] h-[200px] -translate-x-[50px] relative bottom-8">
-  <Image
-    src="/images/publisher.png"
-    alt="The Publisher"
-    width={500}
-    height={500}
-    className="h-full w-full object-contain"
-  />
-</div>
-    ), // <-- drop your SVG here
+      <div className="w-[200px] h-[200px] -translate-x-[50px] relative bottom-8">
+        <Image
+          src="/images/publisher.png"
+          alt="The Publisher"
+          width={500}
+          height={500}
+          className="h-full w-full object-contain"
+        />
+      </div>
+    ), 
   },
   {
     number: "02",
@@ -65,36 +60,35 @@ const roles = [
     tag: "You Promote",
     description:
       "Promoters help content and brands reach the right audience through collaboration.",
-      
-    // The promoter card has an extra "two types" sub-section instead
-    // of a plain bullet list — handled separately in the JSX below.
     subTypes: [
       {
         title: "INFLUENCER",
         items: ["Promotes RankCine", "Shares our platform", "Invites community", "Drives more users"],
-        illustration: null, // <-- drop your SVG here
+        illustration: null, 
       },
       {
         title: "BRANDS",
         items: ["Promotes their brands", "Runs campaigns", "Reaches target audience", "Collaborates on RankCine"],
-        illustration: null, // <-- drop your SVG here
+        illustration: null, 
       },
     ],
     footerNote:
       "Together, they create visibility, build trust and grow the entire ecosystem.",
     buttonLabel: "I WANT TO PROMOTE →",
     buttonVariant: "pill-green",
+    href: "https://studio.rankcine.com/register",
+    isExternal: true,
     illustration: (
-     <div className="   w-[180px] h-[180px] -translate-x-[50px] relative bottom-8">
-  <Image
-    src="/images/horn.png"
-    alt="The Horn"
-    width={500}
-    height={500}
-    className="h-full w-full object-contain"
-  />
-</div>
-    ),  // <-- drop your SVG here (megaphone)
+      <div className="w-[180px] h-[180px] -translate-x-[50px] relative bottom-8">
+        <Image
+          src="/images/horn.png"
+          alt="The Horn"
+          width={500}
+          height={500}
+          className="h-full w-full object-contain"
+        />
+      </div>
+    ),  
   },
   {
     number: "03",
@@ -117,17 +111,19 @@ const roles = [
     ],
     buttonLabel: "I WANT TO PUBLISH →",
     buttonVariant: "pill-pink",
+    href: "https://studio.rankcine.com/register",
+    isExternal: true,
     illustration:(
-     <div className="   w-[160px] h-[160px] -translate-x-[30px] relative bottom-8">
-  <Image
-    src="/images/Monitior.png"
-    alt="The Monitior"
-    width={500}
-    height={500}
-    className="h-full w-full object-contain"
-  />
-</div>
-    ),  // <-- drop your SVG here (monitor/upload)
+      <div className="w-[160px] h-[160px] -translate-x-[30px] relative bottom-8">
+        <Image
+          src="/images/Monitior.png"
+          alt="The Monitior"
+          width={500}
+          height={500}
+          className="h-full w-full object-contain"
+        />
+      </div>
+    ), 
   },
 ];
 
@@ -139,17 +135,13 @@ export default function EcosystemRoles() {
         Where the Ranker, Promoter and the Publisher shapes the INFLUENCE
       </h2>
 
-      {/* Card grid — stacks to 1 column on mobile, 3 across on desktop */}
       <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
         {roles.map((role) => (
-          // Outer wrapper carries the gradient halo (border only); the
-          // inner card fill is a flat solid color, no gradient/opacity.
           <div
             key={role.number}
             className={`rounded-[26px] bg-gradient-to-br p-[3px] ${role.haloGradient}`}
           >
             <div className={`flex h-full flex-col rounded-[24px] p-5 shadow-sm ${role.cardBg}`}>
-              {/* Top row: text content on the left, illustration slot on the right */}
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
@@ -172,12 +164,9 @@ export default function EcosystemRoles() {
                   <p className="mt-3 text-sm text-rc-gray-600">{role.description}</p>
                 </div>
 
-                {/* Illustration slot — fixed size box reserved for your
-                    3D character / megaphone / monitor SVG per card. */}
                 <div className="h-28 w-28 shrink-0">{role.illustration}</div>
               </div>
 
-              {/* --- Regular bullet list (Ranker + Publisher cards) --- */}
               {role.bullets && (
                 <>
                   <hr className="mt-4 border-t border-rc-gray-100" />
@@ -195,7 +184,6 @@ export default function EcosystemRoles() {
                 </>
               )}
 
-              {/* --- Promoter card: two-column sub-types instead --- */}
               {role.subTypes && (
                 <div className="mt-4 flex-1">
                   <p className="mb-2 text-center text-[11px] font-bold text-rc-gray-600">
@@ -208,7 +196,6 @@ export default function EcosystemRoles() {
                         className="rounded-lg bg-emerald-100/70 p-2 text-[11px]"
                       >
                         <div className="mb-1 flex items-center gap-1">
-                          {/* Illustration slot for the influencer/brand icon */}
                           <div className="h-6 w-6 shrink-0">{sub.illustration}</div>
                           <p className="font-bold text-emerald-800">{sub.title}</p>
                         </div>
@@ -229,9 +216,19 @@ export default function EcosystemRoles() {
                 </div>
               )}
 
-              <Button variant={role.buttonVariant} className="mt-5 w-full">
-                {role.buttonLabel}
-              </Button>
+              {role.isExternal ? (
+                <a href={role.href} className="mt-5 w-full">
+                  <Button as="span" variant={role.buttonVariant} className="w-full">
+                    {role.buttonLabel}
+                  </Button>
+                </a>
+              ) : (
+                <Link href={role.href} className="mt-5 w-full">
+                  <Button as="span" variant={role.buttonVariant} className="w-full">
+                    {role.buttonLabel}
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         ))}

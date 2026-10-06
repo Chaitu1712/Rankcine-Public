@@ -1,46 +1,45 @@
 import Reveal from "@/components/ui/Reveal";
-import Button from "@/components/ui/Button";
 
 const perks = [
   {
+    glyph: "🎟️",
+    title: "Sponsor Vouchers",
+    description: "Hit the top consensus bins to earn cryptographic RC-<HEX> reward vouchers from brand sponsors.",
+  },
+  {
+    glyph: "🤖",
+    title: "Gemini AI Synthesis",
+    description: "Submit voice or video reviews, and our AI transcribes and synthesizes your feedback instantly.",
+  },
+  {
     glyph: "🎖️",
     title: "Ranker Badges",
-    description: "Earn unique badges as you stay active and consistent.",
-  },
-  {
-    glyph: "🏅",
-    title: "Leaderboard Spotlight",
-    description: "Top rankers get featured on RankCine leaderboards.",
-  },
-  {
-    glyph: "🎁",
-    title: "Exclusive Rewards",
-    description: "Access platform perks, events and future reward programs.",
+    description: "Earn unique badges as your accuracy percentile improves across the platform.",
   },
   {
     glyph: "📈",
     title: "Build Your Reputation",
-    description: "Grow your Trust Score and become a recognized voice in the community.",
+    description: "Grow your Accuracy Index and become a verified top-tier voice in the community.",
   },
   {
     glyph: "👁",
     title: "Early Access",
-    description: "Be the first to explore new features and exciting updates.",
+    description: "Be the first to explore new features and exciting platform updates.",
   },
   {
     glyph: "💬",
     title: "Creator Impact",
-    description: "Help great creators get the recognition they truly deserve.",
+    description: "Help great creators get the precise technical feedback they deserve.",
   },
   {
     glyph: "👥",
     title: "Personalized Experience",
-    description: "Get smarter content recommendations tailored to your taste.",
+    description: "Get smarter content recommendations tailored to your taste profile.",
   },
   {
     glyph: "🎯",
-    title: "Shape Rankings",
-    description: "Your honest rankings influence visibility and community charts.",
+    title: "Beat the Bots",
+    description: "Our 0.5 Consensus Engine mathematically eliminates review bombing and fake scores.",
   },
 ];
 
@@ -72,8 +71,6 @@ export default function WhatYouGet() {
           </div>
         </div>
       </Reveal>
-
-    
     </div>
   );
 }

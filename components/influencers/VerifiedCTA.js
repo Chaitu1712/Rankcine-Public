@@ -1,7 +1,7 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import Image from "next/image";
- 
+import Link from "next/link";
 
 const quickSteps = [
   { glyph: "📋", bg: "bg-violet-100", title: "Fill the Influencer Form", description: "Share your details, content niche, and social media links." },
@@ -19,7 +19,6 @@ const journeySteps = [
 export default function VerifiedCTA() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-16">
-      {/* --- Become a Verified Influencer --- */}
       <Reveal>
         <div className="grid grid-cols-1 items-center gap-10 rounded-3xl bg-rc-purple-light/20 p-8 lg:grid-cols-2">
           <div>
@@ -56,24 +55,26 @@ export default function VerifiedCTA() {
                 </div>
               ))}
             </div>
-<a href="#influencer-form">
-  <Button
-    variant="purple"
-    className="mt-6 transition-transform duration-200 hover:scale-105"
-  >
-    Fill the Influencer Form →
-  </Button>
-</a>
+
+            <a href="#influencer-form">
+              <Button
+                as="span"
+                variant="purple"
+                className="mt-6 transition-transform duration-200 hover:scale-105"
+              >
+                Fill the Influencer Form →
+              </Button>
+            </a>
+
             <p className="mt-2 text-xs text-rc-gray-600">
               🔒 Secure. Simple. Verified.
             </p>
           </div>
 
-          {/* Clipboard illustration placeholder */}
           <div className="flex flex-col items-center gap-4">
             <Image
               src="/images/verifiedinfluencer.png"
-              alt="Trophy"
+              alt="Verified Rank Cine Influencer Application Process"
               width={450}
               height={450}
               className="object-contain"
@@ -91,7 +92,6 @@ export default function VerifiedCTA() {
         </div>
       </Reveal>
 
-      {/* --- Your Onboarding Journey --- */}
       <Reveal delay={150}>
         <h3 className="mt-14 text-center text-2xl font-extrabold text-rc-black sm:text-3xl">
           Your <span className="text-rc-purple">Onboarding</span> Journey

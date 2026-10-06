@@ -25,12 +25,15 @@ export default function RankingsPower() {
             Every rank you give helps great content get the attention it
             truly deserves !
           </p>
+          <a href="/coming-soon">
           <Button
             variant="purple"
             className="mt-4 transition-transform duration-200 hover:scale-105"
+            style={{cursor: 'pointer'}}
           >
             Start Ranking →
           </Button>
+          </a>
         </div>
 
          

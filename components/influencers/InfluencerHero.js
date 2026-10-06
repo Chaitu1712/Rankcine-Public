@@ -21,23 +21,21 @@ export default function InfluencerHero() {
             Promote our platform and build real influence inside a
             ranking-first community.
           </p>
-<a href="#influencer-form">
-
+          <a href="#influencer-form">
           <Button
             variant="outline-purple"
+            style={{cursor: 'pointer'}}
             className="mt-6 transition-transform duration-200 hover:scale-105"
           >
             Join as INFLUENCER →
-          </Button></a>
+          </Button>
+          </a>
         </Reveal>
-
-        {/* Handshake illustration placeholder — swap for the real
-            Figma export once available. */}
         <Reveal delay={150}>
           <div className="flex h-56 items-center justify-center text-8xl transition-transform duration-500 hover:scale-105">
              <Image
       src="/images/handshake.png"
-      alt="Trophy"
+      alt="Rank Cine Influencer Partnership and Growth"
       width={400}
       height={400}
       className="object-contain"

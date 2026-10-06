@@ -1,9 +1,8 @@
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import Image from "next/image";
+import Link from "next/link";
 
-// Small feature row under the hero copy (Verified Platform, Global
-// Visibility, etc). Data-driven so adding a 5th item is one line.
 const trustFeatures = [
   { glyph: "🛡️", label: "Verified Platform" },
   { glyph: "🌐", label: "Global Visibility" },
@@ -11,23 +10,6 @@ const trustFeatures = [
   { glyph: "🏆", label: "Real Impact" },
 ];
 
-// The colored "content type" cards floating beside the laptop mockup.
-const uploadPreviewCards = [
-  { label: "Movie", color: "bg-indigo-500" },
-  { label: "Web Series", color: "bg-pink-500" },
-  { label: "Short Films", color: "bg-amber-500" },
-  { label: "Video", color: "bg-violet-500" },
-];
-
-// The 3 destination bubbles on the right of the laptop (what your
-// upload flows into).
-const destinations = [
-  { glyph: "👥", label: "Rankers" },
-  { glyph: "📣", label: "Prometers" },
-  { glyph: "🏆", label: "Trending Rankings" },
-];
-
-// "What You Upload" row.
 const contentTypes = [
   { glyph: "🎬", label: "Movies" },
   { glyph: "📺", label: "Web Series" },
@@ -36,7 +18,6 @@ const contentTypes = [
   { glyph: "✂️", label: "Trailers & Clips" },
 ];
 
-// Small tag pills next to the content type icons.
 const contentTags = [
   { glyph: "🔷", label: "HD Quality" },
   { glyph: "✅", label: "Verified Content" },
@@ -58,10 +39,8 @@ export default function PublisherHero() {
         </h1>
       </Reveal>
 
-      {/* Main panel */}
       <Reveal delay={100}>
         <div className="mt-10 grid grid-cols-1 items-center gap-10 rounded-3xl bg-gradient-to-br from-rc-purple-light/40 to-white p-8 lg:grid-cols-2">
-          {/* Left: copy + CTAs + trust row */}
           <div>
             <span className="inline-block rounded-pill bg-rc-purple-light px-3 py-1 text-[10px] font-bold tracking-wide text-rc-purple-dark">
               FOR PUBLISHERS
@@ -79,18 +58,18 @@ export default function PublisherHero() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button variant="purple" className="transition-transform duration-200 hover:scale-105">
-                Join as Publisher →
-              </Button>
-              <Button
-                variant="outline-purple"
-                className="gap-1 transition-transform duration-200 hover:scale-105"
-              >
-                ▶ Learn More
-              </Button>
+              <a href="https://studio.rankcine.com/register">
+                <Button as="span" variant="purple" className="transition-transform duration-200 hover:scale-105">
+                  Join as Publisher →
+                </Button>
+              </a>
+              <Link href="/faq">
+                <Button as="span" variant="outline-purple" className="gap-1 transition-transform duration-200 hover:scale-105">
+                  ▶ Learn More
+                </Button>
+              </Link>
             </div>
 
-            {/* Trust features row */}
             <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {trustFeatures.map((feature) => (
                 <div
@@ -106,20 +85,17 @@ export default function PublisherHero() {
             </div>
           </div>
 
-         {/* Right: laptop upload mockup illustration */}
-<div className="relative w-full aspect-[16/9]">
-  <Image
-    src="/images/PublisherTop.png"
-    alt="Laptop upload mockup"
-    fill
-    className="object-contain"
-  />
-</div>
-          
+          <div className="relative w-full aspect-[16/9]">
+            <Image
+              src="/images/PublisherTop.png"
+              alt="Rank Cine Publisher Studio Content Upload Dashboard"
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
       </Reveal>
 
-      {/* "What You Upload" row */}
       <Reveal delay={200}>
         <div className="mt-10 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
           <p className="mb-4 text-center text-sm font-extrabold text-rc-black">

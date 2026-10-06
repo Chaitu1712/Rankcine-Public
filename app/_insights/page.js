@@ -2,10 +2,12 @@ import RankerView from "@/components/insights/RankerView";
 import PublisherView from "@/components/insights/PublisherView";
 import BrandView from "@/components/insights/BrandView";
 
-// Lives at the /insights URL (app/insights/page.js → "/insights").
-// The three dashboard mockups (Ranker/Publisher/Brand) are stacked
-// sequentially on one page — NOT tab-switched — matching the
-// screenshots, which show all three under the same page heading.
+export const metadata = {
+  title: "Platform Insights | Rank Cine",
+  description: "Explore live analytics, top trending content, demographic tracking, and campaign ROI data across the Rank Cine ecosystem.",
+  alternates: { canonical: 'https://rankcine.com/insights' }
+};
+
 export default function InsightsPage() {
   return (
     <main>
@@ -14,7 +16,6 @@ export default function InsightsPage() {
           Insights &amp; Analytics
         </h1>
       </div>
-
       <RankerView />
       <PublisherView />
       <BrandView />

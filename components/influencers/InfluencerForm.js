@@ -1,15 +1,5 @@
 "use client";
 
-// components/influencers/InfluencerForm.js
-//
-// Real, working form: controlled inputs, submit handling, plus the two
-// client-side pieces of the security checklist:
-//   - a hidden honeypot field bots tend to fill in
-//   - a Cloudflare Turnstile captcha widget, whose token gets sent to the
-//     server and verified there before anything is saved
-//
- 
-
 import { useState, useEffect, useRef } from "react";
 import Script from "next/script";
 import Reveal from "@/components/ui/Reveal";
@@ -30,48 +20,56 @@ const initialFormState = {
   phone: "",
   dob: "",
   country: "",
+  socialLink: "",
   niche: "",
   audienceRange: "",
   about: "",
   whyJoin: "",
-  // Honeypot — real users never see this field. Any real fill-in on submit
-  // tells the server it's almost certainly a bot.
-  website: "",
+  website: "", // Honeypot
 };
 
 export default function InfluencerForm() {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileReady, setTurnstileReady] = useState(false);
   const turnstileWidgetRef = useRef(null);
   const turnstileIdRef = useRef(null);
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  // Register the global callback Turnstile calls once a person passes the
-  // challenge. Must exist on `window` before the widget script runs it.
   useEffect(() => {
-  if (!turnstileReady || !turnstileWidgetRef.current || !window.turnstile) {
-    return;
-  }
-  if (turnstileIdRef.current) return;
+    if (!turnstileReady || !turnstileWidgetRef.current || !window.turnstile || !turnstileSiteKey) {
+      return;
+    }
+    if (turnstileIdRef.current) return;
 
-  turnstileIdRef.current = window.turnstile.render(turnstileWidgetRef.current, {
-    sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-    callback: (token) => setTurnstileToken(token),
-    "expired-callback": () => setTurnstileToken(""),
-  });
-}, [turnstileReady]);
+    turnstileIdRef.current = window.turnstile.render(turnstileWidgetRef.current, {
+      sitekey: turnstileSiteKey,
+      callback: (token) => setTurnstileToken(token),
+      "expired-callback": () => setTurnstileToken(""),
+    });
+  }, [turnstileReady, turnstileSiteKey]);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setStatusMessage(null);
 
-    if (!turnstileToken) {
-      alert("Please complete the captcha before submitting.");
+    // Bot honeypot check
+    if (formData.website) {
+      setStatusMessage({ type: "success", text: "Application submitted successfully!" });
+      setFormData(initialFormState);
+      return;
+    }
+
+    if (turnstileSiteKey && !turnstileToken) {
+      setStatusMessage({ type: "error", text: "Please complete the captcha verification." });
       return;
     }
 
@@ -87,33 +85,32 @@ export default function InfluencerForm() {
       const result = await res.json();
 
       if (!res.ok || !result.success) {
-        alert(result.message || "Something went wrong. Please try again.");
-        return;
+        throw new Error(result.message || "Failed to submit application.");
       }
 
-      alert("Application submitted successfully!");
+      setStatusMessage({ type: "success", text: "Application submitted successfully! Our team will contact you shortly." });
       setFormData(initialFormState);
       setTurnstileToken("");
-      // Reset the widget so a second submission needs a fresh token
+
       if (window.turnstile && turnstileIdRef.current) {
         window.turnstile.reset(turnstileIdRef.current);
       }
     } catch (error) {
-      console.error("Network or unexpected error submitting form:", error);
-      alert("Network error — please check your connection and try again.");
+      setStatusMessage({ type: "error", text: error.message || "Network error. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-<section id="influencer-form" className="mx-auto max-w-4xl px-6 py-16">
-        {/* Loads the Turnstile widget script once, client-side only */}
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="afterInteractive"
-        onLoad={() => setTurnstileReady(true)}
-      />
+    <section id="influencer-form" className="mx-auto max-w-4xl px-6 py-16">
+      {turnstileSiteKey && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+          onLoad={() => setTurnstileReady(true)}
+        />
+      )}
 
       <Reveal>
         <div className="flex flex-col items-center gap-4 text-center">
@@ -139,18 +136,23 @@ export default function InfluencerForm() {
           className="mt-10 rounded-3xl bg-white p-8 shadow-[0_0_40px_rgba(147,51,234,0.12)] ring-1 ring-rc-purple-light"
         >
           <p className="mb-6 text-center text-sm font-bold text-rc-purple">
-            Influencer Onboarding Form (Sample)
+            Influencer Onboarding Form
           </p>
 
-          {/* --------------------------------------------------------- */}
-          {/* Honeypot field — hidden from real users via off-screen     */}
-          {/* positioning (not display:none, which some bots detect and */}
-          {/* skip). Real visitors will never see or fill this in.       */}
-          {/* --------------------------------------------------------- */}
-          <div
-            style={{ position: "absolute", left: "-9999px" }}
-            aria-hidden="true"
-          >
+          {statusMessage && (
+            <div
+              className={`mb-6 p-4 rounded-xl text-xs font-semibold ${
+                statusMessage.type === "success"
+                  ? "bg-green-50 text-green-700 border border-green-200"
+                  : "bg-red-50 text-red-700 border border-red-200"
+              }`}
+            >
+              {statusMessage.text}
+            </div>
+          )}
+
+          {/* Honeypot field */}
+          <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
             <label htmlFor="website">Website</label>
             <input
               type="text"
@@ -240,10 +242,9 @@ export default function InfluencerForm() {
             </Field>
           </div>
 
-          {/* Social media links */}
           <div className="mt-5">
             <p className="mb-2 text-xs font-bold text-rc-black">
-              Social Media Links *
+              Primary Social Media Link *
             </p>
             <div className="flex flex-wrap items-center gap-2">
               {socialPlatforms.map((platform) => (
@@ -255,8 +256,12 @@ export default function InfluencerForm() {
                 </span>
               ))}
               <input
-                type="text"
-                placeholder="Add other social media link"
+                type="url"
+                name="socialLink"
+                value={formData.socialLink}
+                onChange={handleChange}
+                required
+                placeholder="https://instagram.com/yourhandle"
                 className="input-field flex-1"
               />
             </div>
@@ -272,11 +277,11 @@ export default function InfluencerForm() {
                 className="input-field"
               >
                 <option value="">Select your primary niche</option>
-                <option value="fashion">Fashion</option>
-                <option value="tech">Tech</option>
-                <option value="lifestyle">Lifestyle</option>
-                <option value="fitness">Fitness</option>
-                <option value="entertainment">Entertainment</option>
+                <option value="entertainment">Entertainment & Film</option>
+                <option value="music">Music & Audio</option>
+                <option value="tech">Tech & Gaming</option>
+                <option value="lifestyle">Lifestyle & Culture</option>
+                <option value="fashion">Fashion & Arts</option>
               </select>
             </Field>
 
@@ -299,43 +304,45 @@ export default function InfluencerForm() {
 
           <div className="mt-5">
             <Field label="Tell us about yourself *">
-              <input
-                type="text"
+              <textarea
                 name="about"
+                rows={3}
                 value={formData.about}
                 onChange={handleChange}
                 required
-                placeholder="Share your journey, content style and what makes you unique... (min 10 characters)"
-                className="input-field"
+                placeholder="Share your journey, content style and what makes you unique..."
+                className="input-field resize-none"
               />
             </Field>
           </div>
 
           <div className="mt-5">
             <Field label="Why do you want to join as an influencer on RankCine? *">
-              <input
-                type="text"
+              <textarea
                 name="whyJoin"
+                rows={3}
                 value={formData.whyJoin}
                 onChange={handleChange}
                 required
-                placeholder="Your answer... (min 10 characters)"
-                className="input-field"
+                placeholder="Your motivation, creator goals, and audience vision..."
+                className="input-field resize-none"
               />
             </Field>
           </div>
 
-          {/* Turnstile captcha widget renders into this div */}
-          <div className="mt-6 flex justify-center">
-            <div ref={turnstileWidgetRef} />
-          </div>
+          {turnstileSiteKey && (
+            <div className="mt-6 flex justify-center">
+              <div ref={turnstileWidgetRef} />
+            </div>
+          )}
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-8 w-full rounded-pill bg-rc-purple py-3 text-sm font-bold text-white transition-transform duration-200 hover:scale-[1.02] disabled:opacity-60"
+            className="mt-8 w-full rounded-full bg-rc-purple py-3.5 text-sm font-bold text-white transition-all duration-200 hover:scale-[1.01] hover:shadow-lg disabled:opacity-50"
+            style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }}
           >
-            {isSubmitting ? "Submitting..." : "Submit Application →"}
+            {isSubmitting ? "Submitting Application..." : "Submit Application →"}
           </button>
         </form>
       </Reveal>
@@ -343,22 +350,23 @@ export default function InfluencerForm() {
       <style jsx>{`
         :global(.input-field) {
           width: 100%;
-          border: 1px solid #f4f4f5;
+          border: 1px solid #e4e4e7;
           border-radius: 0.75rem;
-          padding: 0.6rem 0.9rem;
-          font-size: 0.8rem;
-          transition: border-color 0.2s;
+          padding: 0.65rem 0.9rem;
+          font-size: 0.825rem;
+          color: #18181b;
+          transition: border-color 0.2s, box-shadow 0.2s;
         }
         :global(.input-field:focus) {
           outline: none;
-          border-color: #6c5ce7;
+          border-color: #9333ea;
+          box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.1);
         }
       `}</style>
     </section>
   );
 }
 
-// Small label + input wrapper used throughout the form above.
 function Field({ label, children }) {
   return (
     <label className="block">

@@ -159,29 +159,6 @@ export default function WhyPartner() {
           </Reveal>
         ))}
       </div>
-
-      {/* Closing CTA bar */}
-      <Reveal delay={200}>
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl bg-rc-gray-50 p-6 sm:flex-row">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl">🚀</span>
-            <div>
-              <p className="text-sm font-extrabold text-rc-black">
-                Partner. Perform. Get Recognized.
-              </p>
-              <p className="text-xs text-rc-gray-600">
-                More impact. More rewards. More you.
-              </p>
-            </div>
-          </div>
-          <Button
-            variant="purple"
-            className="transition-transform duration-200 hover:scale-105"
-          >
-            GET THE APP →
-          </Button>
-        </div>
-      </Reveal>
     </section>
   );
 }

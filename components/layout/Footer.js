@@ -1,60 +1,36 @@
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
  
-// Each column in the footer's link grid. Storing these as data means
-// adding a new link is just adding a string to an array — you never
-// need to touch the JSX layout below.
 const linkColumns = [
   {
     title: "EXPLORE",
     links: [
-      "Home",
-      "FAQ",
-      "Publisher",
-      "Ranker",
-      "Brand",
-      "Influencer",
-      "Insights",
-      "Pricing",
+      { label: "Home", href: "/" },
+      { label: "Publisher Studio", href: "/publisher" },
+      { label: "Consumer App", href: "/ranker" },
+      { label: "Brand Sponsors", href: "/brands" },
+      { label: "Influencer Program", href: "/influencers" },
     ],
   },
   {
-    title: "HELP & GUIDE",
+    title: "SUPPORT & CONTACT",
     links: [
-      "Help Centre",
-      "How It Works",
-      "Getting Started",
-      "Guidelines",
-      "Community",
-      "Support",
-      "Sitemap",
-    ],
-  },
-  {
-    title: "CONTACT",
-    links: [
-      "Contact Us",
-      "Partnerships",
-      "Press & Media",
-      "Advertising",
-      "Feedback",
+      { label: "FAQ & Help Centre", href: "/faq" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "B2B Partnerships", href: "https://studio.rankcine.com/register" },
     ],
   },
   {
     title: "LEGAL",
     links: [
-      "Privacy Policy",
-      "Terms & Conditions",
-      "Content Policy",
-      "Refund Policy",
-      "Cookie Policy",
-      "Data Protection",
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
   },
 ];
 
-// Platform stats shown in the bar above the very bottom of the footer.
 const stats = [
   { value: "2.1M+", label: "ACTIVE RANKERS" },
   { value: "480K", label: "DAILY VOTES" },
@@ -73,7 +49,6 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="mx-auto max-w-6xl px-6 pb-10 pt-16">
-      {/* --- Top CTA banner --- */}
       <p className="mb-4 text-center text-lg font-extrabold text-pink-400">
         Every vote climbs the ladder.
       </p>
@@ -91,32 +66,38 @@ export default function Footer() {
           The ranking ecosystem in your pocket.
         </p>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-3 ">
-          <Button variant="black" className="gap-2 rounded-3xl">
-            <span aria-hidden> </span> Download on App Store
-          </Button>
-          <Button variant="black" className="gap-2 rounded-3xl">
-            <span aria-hidden>▶</span> Get it on Google Play
-          </Button>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link href="/coming-soon">
+            <Button as="span" variant="outline-purple" className="gap-2 rounded-3xl">
+              <span aria-hidden><img src="/images/app-store.png" alt="Download on App Store" className="h-full w-full object-contain" style={{maxHeight: "5vh"}} /></span> Download on App Store
+            </Button>
+          </Link>
+          <Link href="/coming-soon">
+            <Button as="span" variant="outline-green" className="gap-2 rounded-3xl">
+              <span aria-hidden><img src="/images/play-store.png" alt="Get it on Google Play" className="h-full w-full object-contain" style={{maxHeight: "5vh"}} /></span> Get it on Google Play
+            </Button>
+          </Link>
         </div>
       </div>
 
-      {/* --- Link columns --- */}
-      <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
         {linkColumns.map((column) => (
           <div key={column.title}>
             <p className="mb-3 text-xs font-extrabold tracking-wide text-rc-purple-dark">
               {column.title}
             </p>
             <ul className="space-y-2">
-              {column.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-rc-gray-600 hover:text-rc-purple"
-                  >
-                    {link} <span className="text-rc-gray-400">›</span>
-                  </a>
+              {column.links.map((item) => (
+                <li key={item.label}>
+                  {item.href.startsWith('http') ? (
+                    <a href={item.href} className="text-sm text-rc-gray-600 hover:text-rc-purple transition-colors">
+                      {item.label} <span className="text-rc-gray-400">›</span>
+                    </a>
+                  ) : (
+                    <Link href={item.href} className="text-sm text-rc-gray-600 hover:text-rc-purple transition-colors">
+                      {item.label} <span className="text-rc-gray-400">›</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -124,7 +105,6 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* --- Stats bar --- */}
       <div className="mt-12 grid grid-cols-2 gap-6 rounded-2xl bg-white p-8 shadow-sm sm:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="text-center">
@@ -138,7 +118,6 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* --- Bottom bar: made-with-love note + social icons --- */}
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 sm:flex-row">
          <p className="text-xs text-rc-gray-600">
     &copy; {new Date().getFullYear()} Rankcine. All rights reserved. This
@@ -161,7 +140,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom gradient accent strip, matches the screenshot */}
       <div className="mt-6 h-1 w-full rounded-full bg-gradient-to-r from-rc-purple to-pink-400" />
     </footer>
   );

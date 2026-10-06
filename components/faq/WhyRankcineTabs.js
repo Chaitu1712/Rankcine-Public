@@ -240,14 +240,11 @@ export default function WhyRankcineTabs() {
         })}
       </div>
  
-      {/* --- Cards row ---
-          key={activeTab} forces a fresh mount on every tab switch, so
-          the Reveal fade-in replays each time instead of only once. */}
+      
       <div key={activeTab} className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
         {content.cards.map((card, i) => (
           <Reveal key={card.number} delay={i * 120}>
-            {/* `group` here lets the icon badges/list items react
-                to hovering anywhere on the card, not just themselves. */}
+           
             <div className="group flex h-full flex-col rounded-2xl bg-rc-purple-light/20 p-6 transition-all duration-300 hover:-translate-y-2 hover:bg-rc-purple-light/40 hover:shadow-xl">
               {/* Card header */}
               <div className="mb-1 flex items-center gap-2">

@@ -1,22 +1,21 @@
- 
 import BrandsHero from "@/components/brands/BrandsHero";
 import CampaignTools from "@/components/brands/CampaignTools";
 import ProvenImpact from "@/components/brands/ProvenImpact";
 import WhyBrandsLoveUs from "@/components/brands/WhyBrandsLoveUs";
 
-// Lives at the /brands URL (app/brands/page.js → "/brands").
-//
-// NOTE: the "Watch. Rank. Be Heard." + App Store/Google Play CTA seen
-// at the bottom of the Brands screenshots is NOT a new component —
-// it's the same Footer already used on the homepage/FAQ/Publisher/
-// Ranker pages, so we just reuse it here instead of rebuilding it.
+export const metadata = {
+  title: "Brand Sponsorships | Rank Cine",
+  description: "Launch targeted sponsor campaigns and fund Rate-to-Earn lucky draws. Reach millions of verified, highly-engaged content rankers with zero bot fraud.",
+  alternates: { canonical: 'https://rankcine.com/brands' }
+};
+
 export default function BrandsPage() {
   return (
     <main>
-       <BrandsHero />
+      <BrandsHero />
       <CampaignTools />
       <WhyBrandsLoveUs/>
       <ProvenImpact />
-     </main>
+    </main>
   );
 }

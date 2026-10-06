@@ -28,12 +28,16 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <button className="rounded-pill bg-rc-black px-6 py-3 text-sm font-bold text-white">
-            Download App →
-          </button>
-          <button className="rounded-pill bg-rc-purple px-6 py-3 text-sm font-bold text-white">
-            PLATFORM DEMO →
-          </button>
+          <a href='/coming-soon'>
+            <button className="rounded-pill bg-rc-black px-6 py-3 text-sm font-bold text-white" style={{ cursor:'pointer'}}>
+              Download App →
+            </button>
+          </a>
+          <a href="#demo">
+            <button className="rounded-pill bg-rc-purple px-6 py-3 text-sm font-bold text-white" style={{ cursor:'pointer'}}>
+              PLATFORM DEMO →
+            </button>
+          </a>
         </div>
 
         <div className="mt-6 flex items-center gap-3">
