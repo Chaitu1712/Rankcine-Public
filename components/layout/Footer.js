@@ -8,6 +8,7 @@ const linkColumns = [
     title: "EXPLORE",
     links: [
       { label: "Home", href: "/" },
+      { label: "About the Team", href: "/about-team" },
       { label: "Publisher Studio", href: "/publisher" },
       { label: "Consumer App", href: "/ranker" },
       { label: "Brand Sponsors", href: "/brands" },
@@ -38,7 +39,6 @@ const stats = [
   { value: "120+", label: "COUNTRIES" },
 ];
 
-// Social links shown in the bottom bar.
 const socials = [
   { icon: FaInstagram, href: "https://www.instagram.com/rankcine_?igsi=MTJzcW1xdmVhY2lxaQ%3D%3D&utm_source=qr", label: "Instagram" },
   { icon: FaXTwitter, href: "https://x.com/rankcine_1?s=11", label: "X" },
@@ -119,10 +119,10 @@ export default function Footer() {
       </div>
 
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 sm:flex-row">
-         <p className="text-xs text-rc-gray-600">
-    &copy; {new Date().getFullYear()} Rankcine. All rights reserved. This
-    product and its content are protected by copyright law.
-  </p>
+        <p className="text-xs text-rc-gray-600">
+          &copy; {new Date().getFullYear()} Rankcine. All rights reserved. This
+          product and its content are protected by copyright law.
+        </p>
 
         <div className="flex gap-3">
           {socials.map(({ icon: Icon, href, label }) => (

@@ -6,3 +6,8 @@ node_modules/
 .DS_Store
 *.log
 out/
+prisma
+prisma.config.ts
+.windsurf/skills
+.claude
+.agents
